@@ -14,7 +14,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    public function slimes(): HasMany {
+    public function people(): HasMany {
         return $this->HasMany(SlimeList::class);
     }
 

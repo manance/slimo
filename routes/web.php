@@ -2,7 +2,7 @@
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SlimeListController;
-use App\Models\SlimeList;
+use App\Http\Controllers\SlimeTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function (){
@@ -21,7 +21,16 @@ Route::middleware('auth')->group(function () {
         return view('auth.profile');
     });
     Route::delete('/logout', [SessionController::class, 'destroy']);
+
     Route::get('/list', [SlimeListController::class, 'index']);
-    Route::get('/create', [SlimeListController::class, 'create']);
-    Route::post('/create', [SlimeListController::class, 'store']);
+    Route::get('/list/create', [SlimeListController::class, 'create']);
+    Route::post('/list/create', [SlimeListController::class, 'store']);
+    Route::get('/list/{list}', [SlimeListController::class, 'show']);
+    Route::get('/list/{list}/edit', [SlimeListController::class, 'edit']);
+    Route::put('/list/{list}', [SlimeListController::class, 'update']);
+    Route::delete('/list/{list}', [SlimeListController::class, 'destroy']);
+
+    Route::get('/type', [SlimeTypeController::class, 'index']);
+    Route::get('/add-type', [SlimeTypeController::class, 'create']);
+    Route::post('/add-type', [SlimeTypeController::class, 'store']);
 });
