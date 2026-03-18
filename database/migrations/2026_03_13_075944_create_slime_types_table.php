@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('slime_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('affected_people');
-            $table->decimal('rating', 3, 2);
+            $table->integer('affected_people')->default(0);
+            $table->decimal('rating', 3, 2)->default(0);
+            $table->integer('people_rated')->default(0);
             $table->timestamps();
         });
     }

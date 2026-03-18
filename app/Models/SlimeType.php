@@ -9,7 +9,8 @@ class SlimeType extends Model
     protected $fillable = [
         'name',
         'affected_people',
-        'rating'
+        'rating',
+        'people_rated'
     ];
     public function types(): HasMany{
         return $this->HasMany(SlimeList::class);

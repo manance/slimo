@@ -36,5 +36,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/type/{type}', [SlimeTypeController::class, 'show']);
     Route::put('/type/{type}', [SlimeTypeController::class, 'update']);
     Route::delete('/type/{type}', [SlimeTypeController::class, 'destroy']);
-    Route::get('/type/{type}/edit', [SlimeTypeController::class, 'edit']);
 });
