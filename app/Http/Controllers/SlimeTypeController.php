@@ -11,6 +11,9 @@ class SlimeTypeController extends Controller
         $slimes = SlimeType::all();
         return view('slimes.index', compact('slimes'));
     }
+    public function show(SlimeType $type){
+        return view('slimes.show', compact('type'));
+    }
     public function create(){
         return view('slimes.create');
     }

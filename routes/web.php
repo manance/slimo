@@ -22,15 +22,19 @@ Route::middleware('auth')->group(function () {
     });
     Route::delete('/logout', [SessionController::class, 'destroy']);
 
-    Route::get('/list', [SlimeListController::class, 'index']);
+    Route::get('/list', [SlimeListController::class, 'index'])->name('list');
     Route::get('/list/create', [SlimeListController::class, 'create']);
     Route::post('/list/create', [SlimeListController::class, 'store']);
     Route::get('/list/{list}', [SlimeListController::class, 'show']);
-    Route::get('/list/{list}/edit', [SlimeListController::class, 'edit']);
     Route::put('/list/{list}', [SlimeListController::class, 'update']);
     Route::delete('/list/{list}', [SlimeListController::class, 'destroy']);
+    Route::get('/list/{list}/edit', [SlimeListController::class, 'edit']);
 
     Route::get('/type', [SlimeTypeController::class, 'index']);
-    Route::get('/add-type', [SlimeTypeController::class, 'create']);
-    Route::post('/add-type', [SlimeTypeController::class, 'store']);
+    Route::get('/type/create', [SlimeTypeController::class, 'create']);
+    Route::post('/type/create', [SlimeTypeController::class, 'store']);
+    Route::get('/type/{type}', [SlimeTypeController::class, 'show']);
+    Route::put('/type/{type}', [SlimeTypeController::class, 'update']);
+    Route::delete('/type/{type}', [SlimeTypeController::class, 'destroy']);
+    Route::get('/type/{type}/edit', [SlimeTypeController::class, 'edit']);
 });

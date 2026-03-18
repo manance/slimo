@@ -25,6 +25,7 @@ class SlimeListController extends Controller
         return view('list.create', compact('slimes'));
     }
     public function store(Request $request){
+        $slimes = SlimeType::all();
         $validated = $request->validate([
             "first_name" => ["required", "max:20"],
             "last_name" => ["required", "max:20"],
@@ -33,6 +34,15 @@ class SlimeListController extends Controller
             "user_id" => ["required"],
             "slime" => ["required"]
         ]);
+        foreach($slimes as $slime){
+            if($validated["slime"] == $slime->id){
+                $count = 1;
+                $count += $slime->affected_people;
+                $slime->update([
+                    "affected_people" => $count
+                ]);
+            }
+        }
         SlimeList::create([
             "first_name" => $validated["first_name"],
             "last_name" => $validated["last_name"],
@@ -41,7 +51,37 @@ class SlimeListController extends Controller
             "user_id" => $validated["user_id"],
             "slime_type_id" => $validated["slime"]
         ]);
+        
         $request->session()->regenerate();
+        return redirect("/list");
+    }
+    public function edit(SlimeList $list){
+        $slimes = SlimeType::all();
+        if($list->user_id !== Auth::id()){
+            abort(404, "page not found.");
+        }
+        return view('list.edit', compact('list', 'slimes'));
+    }
+    public function update(Request $request, SlimeList $list){
+        $validated = $request->validate([
+            "first_name" => ["required", "max:20"],
+            "last_name" => ["required", "max:20"],
+            "estimated_date" => ["required"],
+            "user_id" => ["required"],
+            "slime" => ["required"]
+        ]);
+        $list->update([
+            "first_name" => $validated["first_name"],
+            "last_name" => $validated["last_name"],
+            "estimated_date" => $validated["estimated_date"],
+            "user_id" => $validated["user_id"],
+            "slime_type_id" => $validated["slime"]
+        ]);
+        $request->session()->regenerate();
+        return redirect("/list");
+    }
+    public function destroy(SlimeList $list){
+        $list->delete();
         return redirect("/list");
     }
 }
