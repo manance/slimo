@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 class SlimeListController extends Controller
 {
     public function index(User $user){
+        $css = "list.css";
         $people = $user->people();
-        return view('list.index', compact('people'));
+        return view('list.index', compact('people', 'css'));
     }
     public function show(SlimeList $list){
         if($list->user_id !== Auth::id()){

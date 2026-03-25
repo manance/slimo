@@ -1,5 +1,6 @@
 <x-layout>
     <x-slot:title>Full list</x-slot:title>
+    <x-slot:css>list.css</x-slot:css>
     <h1>List of people you want to slime:</h1>
     <ul>
         @foreach(Auth::user()->people as $person)
