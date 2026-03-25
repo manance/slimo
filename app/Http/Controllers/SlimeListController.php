@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\History;
 use App\Models\SlimeList;
 use App\Models\SlimeType;
 use App\Models\User;
@@ -51,7 +51,14 @@ class SlimeListController extends Controller
             "user_id" => $validated["user_id"],
             "slime_type_id" => $validated["slime"]
         ]);
-        
+        History::create([
+            "name" => $validated["first_name"],
+            "surname" => $validated["last_name"],
+            "execution" => "none",
+            "time_of_event" => $validated["estimated_date"],
+            "user_id" => $validated["user_id"],
+            "slime_type_id" => $validated["slime"]
+        ]);
         $request->session()->regenerate();
         return redirect("/list");
     }
@@ -80,8 +87,17 @@ class SlimeListController extends Controller
         $request->session()->regenerate();
         return redirect("/list");
     }
-    public function destroy(SlimeList $list){
+    public function destroy(SlimeList $list, Request $request){
+        $people = User::find(Auth::id())->history;
+        foreach($people as $person){
+            if($person->id == $list->id){
+                $person->update([
+                    "execution" => "canceled"
+                ]);
+            }
+        }
         $list->delete();
+        $request->session()->regenerate();
         return redirect("/list");
     }
 }

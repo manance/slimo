@@ -37,7 +37,6 @@ class SlimeTypeController extends Controller
         
         $count = $type->people_rated + 1;
         $x = ($type->rating * $count) + $validated["rating"];
-        // dd($type->rating, $count, $x, $x / $count);
         $rating = (($type->rating * $type->people_rated) + $validated["rating"]) / $count;
         $type->update([
             "rating" => $rating,
@@ -47,6 +46,7 @@ class SlimeTypeController extends Controller
         return redirect("/type/$type->id");
     }
     public function destroy(SlimeType $type, Request $request){
+
         $type->delete();
         $request->session()->regenerate();
         return redirect("/type");

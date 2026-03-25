@@ -12,6 +12,7 @@
             <li><a href="/list/create">Add a person</a></li>
             <li><a href="/type">Slime types</a></li>
             <li><a href="/type/create">Add a slime type</a></li>
+            <li><a href="/history">History</a></li>
             @endauth
         </ul>
     </nav>

@@ -15,4 +15,7 @@ class SlimeType extends Model
     public function types(): HasMany{
         return $this->HasMany(SlimeList::class);
     }
+    public function slimes(): HasMany {
+        return $this->HasMany(History::class);
+    }
 }

@@ -17,6 +17,9 @@ class User extends Authenticatable
     public function people(): HasMany {
         return $this->HasMany(SlimeList::class);
     }
+    public function history(): HasMany {
+        return $this->HasMany(History::class);
+    }
 
     /**
      * The attributes that are mass assignable.
