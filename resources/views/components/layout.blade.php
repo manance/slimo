@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset($css ?? 'style.css') }}">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset($css ?? '') }}">
     <link rel="icon" href="{{ asset('SlimoLogo.png') }}" type="image/x-icon">
     <title>{{ $title ?? "Welcome" }}</title>
 </head>
